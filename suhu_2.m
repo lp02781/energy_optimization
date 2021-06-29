@@ -140,3 +140,4 @@ for i = 1:2000
     end
 end
 acc = true/total *100
+plot(error_tot)
