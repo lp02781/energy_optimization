@@ -7,7 +7,7 @@ r = zeros(1,1);
 
 err = zeros(1);
 err = 10;
-alpha = 0.1;
+alpha = 0.05;
 max_epoch = 4000;
 error_tot=zeros(1,max_epoch);
 epoch=0;
@@ -153,4 +153,15 @@ for i = 1:2000
     end
 end
 acc = true/total *100
-plot(error_tot)
+
+for m = 1 : 2000
+    for n = 1 : 1
+       target(m,n) = target(m,n)*344.7300+346.547;
+       p(m,n) = p(m,n)*344.7300+346.547;
+    end
+end
+plot(target)
+hold on
+plot(p)
+legend({'real', 'predict'},'Location','northeast')
+%plot(error_tot)

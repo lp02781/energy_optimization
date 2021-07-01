@@ -1,12 +1,13 @@
 %22.499 24.3894
-%39.3224 49.8416
+%39.3224 63.8494
 %346.547 1,691.27
 
-clear
-
 nvars=2;
-lb=[10 10];
-ub=[100 100];
+lb=[22 39];
+ub=[24 63];
 
-[x, fval] =gamultiobj(@model_2,nvars,[],[],[],[],lb,ub) 
-p = model_2(x)
+[x, fval] =gamultiobj(@model_2,nvars,[],[],[],[],lb,ub)
+
+s = model_2(x)
+
+c = s*344.7300+346.547

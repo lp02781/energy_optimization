@@ -6,8 +6,8 @@ p = zeros(1,1);
 
 err = zeros(1);
 err = 10;
-alpha = 0.1;
-max_epoch = 4000;
+alpha = 0.05;
+max_epoch = 2500;
 error_tot=zeros(1,max_epoch);
 epoch=0;
 error_target = 0.58;
@@ -15,7 +15,7 @@ status = 1;
 
 %variable
 input = irismod(:,[1 2]);
-target = irismod(:, [1]);
+target = irismod(:, [3]);
 
 [len_in_rows, len_in_cols] = size(input);
 [len_out_rows, len_out_cols] = size(target);
@@ -102,14 +102,14 @@ while(status == 1)
         derrdk_old = derrdk;    
     end
     
-    epoch = epoch+1;
-    err = sum((p - target(i,:)).^2)
+    epoch = epoch+1
+    err = sum((p - target(i,:)).^2);
     error_tot(1,epoch) = err;
     if epoch > max_epoch 
         status = 0;
     end
 end
-
+%error_tot(1,1) = 10;
 real = target(1:2000,:);
 x = input(1:2000,:);
 zin = x*v;
@@ -140,4 +140,15 @@ for i = 1:2000
     end
 end
 acc = true/total *100
-plot(error_tot)
+
+for m = 1 : 2000
+    for n = 1 : 1
+       target(m,n) = target(m,n)*344.7300+346.547;
+       p(m,n) = p(m,n)*344.7300+346.547;
+    end
+end
+plot(target)
+hold on
+plot(p)
+legend({'real', 'predict'},'Location','northeast')
+%plot(error_tot)
