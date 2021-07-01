@@ -7,7 +7,7 @@ r = zeros(1,1);
 
 err = zeros(1);
 err = 10;
-alpha = 0.05;
+alpha = 0.1;
 max_epoch = 4000;
 error_tot=zeros(1,max_epoch);
 epoch=0;
@@ -63,7 +63,7 @@ derrdm_old = 0;
 derrdk_old = 0;
 
 while(status == 1)
-    for i = 1:2000;
+    for i = 1:1728;
         x = input(i,:);
         zin = x*v + bias;
         z = sigmoid(zin);
@@ -114,16 +114,16 @@ while(status == 1)
         derrdk_old = derrdk;     
     end
     
-    epoch = epoch+1;
-    err = sum((r - target(i,:)).^2)
+    epoch = epoch+1
+    err = sum((r - target(i,:)).^2);
     error_tot(1,epoch) = err;
     if epoch >= max_epoch
         status = 0;
     end
 end
 
-real = target(1:2000,:);
-x = input(1:2000,:);
+real = target(1:1728,:);
+x = input(1:1728,:);
 zin = x*v;
 z = sigmoid(zin);
 yin = z*w;
@@ -132,11 +132,11 @@ pin = y*k;
 p = sigmoid(pin);
 rin = p*m;
 r = sigmoid(rin);
-err_real = sum((r - target(1:2000, :)).^2);
+err_real = sum((r - target(1:1728, :)).^2);
     
 %find accuracy
 pred = r;
-for i = 1:2000
+for i = 1:1728
     mymax = max(pred(i,:));
     for j = 1:1
         if pred(i,j) == mymax
@@ -146,22 +146,22 @@ for i = 1:2000
     end
 end
 true = 0;
-total = 2000;
-for i = 1:2000
+total = 1728;
+for i = 1:1728
     if real(i,:) == pred(i,:)
         true = true+1;
     end
 end
 acc = true/total *100
 
-for m = 1 : 2000
-    for n = 1 : 1
-       target(m,n) = target(m,n)*344.7300+346.547;
-       p(m,n) = p(m,n)*344.7300+346.547;
+for m = 1 : 1728
+    for n = 1
+       target(m,n) = target(m,n)*580.6600+1110.61;
+       r(m,n) = r(m,n)*580.6600+1110.61;
     end
 end
 plot(target)
 hold on
-plot(p)
+plot(r)
 legend({'real', 'predict'},'Location','northeast')
 %plot(error_tot)
