@@ -147,6 +147,19 @@ for m = 1 : 1728
        p(m,n) = p(m,n)*580.6600+1110.61;
     end
 end
+
+for m = 1 : 1728
+   for n = 1
+       input(m,n) = input(m,n)*1.8612+22.5282;
+    end
+end
+
+for m = 1 : 1728
+    for n = 2
+       input(m,n) = input(m,n)*7.0068+49.8416;
+    end
+end
+
 plot(target)
 hold on
 plot(p)
